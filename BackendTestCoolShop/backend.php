@@ -19,15 +19,20 @@
     $file = fopen($file_path, "r") or die("Can't open file");
 
     // Search and print
+    $flag = false;
     while (($data = fgetcsv($file, 100, ";")) !== false) {
 
         // Finding and printing the row
         $tk = explode(",", $data[0]);
         if ($tk[$column-1] === $parameter){
             echo "$data[0];\n";
+            $flag = true;
         }
             
     }  
+    if($flag == false){
+        echo "The given input didn't correspond to any parameter in the colums of the csv file";
+    }
     fclose($file);
 
 ?>
